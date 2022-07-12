@@ -1,23 +1,25 @@
 <?php
 
-require_once '../app/core/Connection.php';
-
-class Mahasiswa_model extends Connection
+class Mahasiswa_model
 {
-    private $dbh; // database handler (using PDO)
-    private $stmt; // statement
+    private $table = 'mahasiswa';
+    private $db;
 
     public function __construct()
     {
-        $con       = new Connection();
-        $this->dbh = $con->connect();
+        $this->db = new Database;
     }
 
     public function getAllMahasiswa()
     {
-        $this->stmt = $this->dbh->prepare("SELECT name, nim, prodi, email  FROM mahasiswa");
-        $this->stmt->execute();
+        $this->db->query('SELECT id, name, nim, prodi, email FROM ' . $this->table);
+        return $this->db->resultSet();
+    }
 
-        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getMahasiswaById($id)
+    {
+        $this->db->query('SELECT name, nim, prodi, email FROM ' . $this->table . ' WHERE id=:id');
+        $this->db->bind('id', $id);
+        return $this->db->single();
     }
 }
