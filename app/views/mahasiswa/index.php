@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-lg-6">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
                 Tambah data
             </button>
 
@@ -21,6 +21,7 @@
                     <li class="list-group-item">
                         <?= $mhs['name']; ?>
                         <a href="<?= BASEURL ?>/mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge badge-danger float-right ml-1" onclick="return confirm('yakin dek?')">hapus</a>
+                        <a href="<?= BASEURL ?>/mahasiswa/ubah/<?= $mhs['id']; ?>" class="badge badge-success float-right ml-1 tampilModalEdit" data-toggle="modal" data-target="#formModal" data-id="<?= $mhs['id']; ?>">edit</a>
                         <a href="<?= BASEURL ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge badge-primary float-right ml-1">detail</a>
                     </li>
                 <?php endforeach; ?>
@@ -43,6 +44,7 @@
             <div class="modal-body">
 
                 <form action="<?= BASEURL ?>/mahasiswa/tambah" method="POST">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <label for="name">Nama</label>
                         <input type="text" class="form-control" id="name" name="name">
@@ -65,7 +67,6 @@
                         <label for="email">Email</label>
                         <input type="text" class="form-control" id="email" name="email">
                     </div>
-
 
             </div>
             <div class="modal-footer">
