@@ -18,7 +18,7 @@ class Mahasiswa_model
 
     public function getMahasiswaById($id)
     {
-        $this->db->query("SELECT name, nim, prodi, email FROM " . $this->table . " WHERE id=:id");
+        $this->db->query("SELECT id, name, nim, prodi, email FROM " . $this->table . " WHERE id=:id");
         $this->db->bind('id', $id);
         return $this->db->single();
     }
@@ -41,6 +41,21 @@ class Mahasiswa_model
     {
         $this->db->query("DELETE FROM " . $this->table . " WHERE id=:id");
         $this->db->bind('id', $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function ubahDataMahasiswa($data)
+    {
+        $this->db->query("UPDATE " . $this->table . " SET name = :name, nim = :nim, prodi = :prodi, email = :email WHERE id = :id");
+
+        $this->db->bind('name', $data['name']);
+        $this->db->bind('nim', $data['nim']);
+        $this->db->bind('prodi', $data['prodi']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('id', $data['id']);
+
         $this->db->execute();
 
         return $this->db->rowCount();
