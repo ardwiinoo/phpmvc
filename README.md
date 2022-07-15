@@ -58,3 +58,8 @@ Run project
 ```bash
   http://localhost:8080/mvc_projects/phpmvc/public/
 ```
+
+## Authors
+
+- [@ardwiinoo](https://www.github.com/ardwiinoo)
+
